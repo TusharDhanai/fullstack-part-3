@@ -29,5 +29,14 @@ app.get('/api/persons',(request, response) => {
     response.json(contacts)
 })
 
+app.get('/info',(request, response) => {
+    const contactCount = contacts.length
+    const date = new Date()
+    response.send(`
+        <p>Phonebook has info for ${contactCount} people.</p>
+        <p>${date}</p>
+    `)
+})
+
 const PORT = 3001
 app.listen(PORT)

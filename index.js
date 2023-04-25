@@ -59,12 +59,20 @@ app.post('/api/persons',(request, response) => {
     const body = request.body;
 
     if (!body.name) {
-        response.status(400).json({
+        return response.status(400).json({
             error: "Missing name."
         })
     } else if (!body.number) {
-        response.status(400).json({
+        return response.status(400).json({
             error: "Missing number."
+        })
+    }
+
+    const isNameTaken = contacts.filter(item => body.name === item.name)
+
+    if (isNameTaken) {
+        return response.status(400).json({
+            error: "Name must be unique."
         })
     }
 

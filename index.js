@@ -3,7 +3,10 @@ const app = express()
 const logger = require('morgan')
 
 app.use(express.json())
-app.use(logger('tiny'))
+
+logger.token('content', function (req, res) {return JSON.stringify(req.body)})
+
+app.use(logger(':method :url :status :res[content-length] - :response-time ms :content'))
 
 var contacts = [
     {

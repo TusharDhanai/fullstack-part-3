@@ -72,7 +72,7 @@ app.post('/api/persons',(request, response) => {
         })
     }
 
-    const isNameTaken = contacts.filter(item => body.name === item.name)
+    const isNameTaken = contacts.some(item => body.name === item.name)
 
     if (isNameTaken) {
         return response.status(400).json({

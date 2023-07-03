@@ -1,8 +1,9 @@
-const { response } = require('express')
 const express = require('express')
 const app = express()
+const logger = require('morgan')
 
 app.use(express.json())
+app.use(logger('tiny'))
 
 var contacts = [
     {

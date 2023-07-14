@@ -3,12 +3,18 @@ const app = express()
 const logger = require('morgan')
 const cors = require('cors')
 
+app.use(express.static('build'))
 app.use(express.json())
 app.use(cors())
 
-logger.token('content', function (req, res) {return JSON.stringify(req.body)})
+logger.token('content', function (req, res) {
+    if (req.method === 'POST') {
+        return JSON.stringify(req.body);
+    }
+    return;
+})
 
-app.use(logger(':method :url :status :res[content-length] - :response-time ms :content'))
+app.use(logger(':method :url :status :res[content-length] :response-time ms :content'))
 
 var contacts = [
     {
